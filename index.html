@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Quick Blog App</title>
+  <meta charset="UTF-8">
+  <title>Quick Blog with Auth</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>📝 Quick Blog</h1>
-    <div class="form">
-      <input type="text" id="title" placeholder="Post Title" />
-      <textarea id="content" placeholder="Write your blog post..."></textarea>
-      <button onclick="addPost()">Publish</button>
+    <h1>Blog it📝</h1>
+
+    <div id="auth-section">
+      <input type="email" id="email" placeholder="Email" />
+      <input type="password" id="password" placeholder="Password" />
+      <button id="signup-btn">Sign Up</button>
+      <button id="login-btn">Login</button>
+      <button id="logout-btn">Logout</button>
     </div>
 
-    <div id="posts"></div>
+    <div id="blog-section" style="display:none;">
+      <input type="text" id="title" placeholder="Post Title" />
+      <textarea id="content" placeholder="Write your blog post..."></textarea>
+      <button id="publish-btn">Publish</button>
+      <div id="posts"></div>
+    </div>
   </div>
 
-  <script src="script.js"></script>
+  <!-- Firebase SDKs (v9 compat if using compat style) -->
+  <script type="module" src="script.js"></script>
 </body>
 </html>
 
 
 
-    
+
+
