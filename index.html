@@ -6,154 +6,56 @@
   <title>Login - Blog it 📝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
-<body class="bg-light">
-
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-    <a class="navbar-brand" href="#">Blog it 📝</a>
+<body>
+  <nav class="site-nav">
+    <a class="brand" href="index.html"><span class="brand-mark">B</span>Blog it</a>
   </nav>
 
-  <!-- Login Card -->
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-5">
-        <div class="card shadow rounded-4 border-0">
-          <div class="card-body p-4">
-            <h3 class="text-center mb-4">Welcome Back</h3>
+  <main class="auth-page">
+    <section class="auth-layout" aria-label="Blog it login">
+      <div class="auth-intro">
+        <div class="intro-kicker">A home for good ideas</div>
+        <h1 class="display-serif">Make your words worth returning to.</h1>
+        <p>Write clearly, publish honestly, and keep the conversations that matter close.</p>
+        <div class="intro-note"><span>01</span> Your next post starts here.</div>
+      </div>
 
-           <form autocomplete="off">
-  <div class="mb-3">
-   <input 
-  type="text" 
-  id="username" 
-  name="custom-username" 
-  class="form-control" 
-  placeholder="Username" 
-  autocomplete="new-username" 
-/>
+      <div class="auth-card">
+        <h2>Welcome back</h2>
+        <p class="auth-subtitle">Sign in to continue writing.</p>
 
-  </div>
-
-  <div class="mb-3">
-    <input 
-      type="email" 
-      id="email" 
-      name="email" 
-      class="form-control" 
-      placeholder="Email" 
-      autocomplete="email" 
-    />
-  </div>
-
-  <div class="mb-3">
-    <input 
-      type="password" 
-      id="password" 
-      name="password" 
-      class="form-control" 
-      placeholder="Password" 
-      autocomplete="current-password" 
-    />
-  </div>
-</form>
-
-
-
-
-            <div class="d-flex justify-content-between">
-              <button id="signup-btn" class="btn btn-outline-primary w-45">Sign Up</button>
-              <button id="login-btn" class="btn btn-primary w-45">Login</button>
-            </div>
+        <form id="login-form" autocomplete="on">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="you@example.com" autocomplete="email" required />
           </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" autocomplete="current-password" required />
+          </div>
+
+          <div class="auth-actions">
+            <button id="signup-btn" type="button" class="btn btn-outline-primary">Create account</button>
+            <button id="login-btn" type="button" class="btn btn-primary">Log in</button>
+          </div>
+        </form>
+
+        <div class="sample-login">
+          <strong>Sample account</strong>
+          Email: <code>demo@blogit.dev</code><br />
+          Password: <code>Blogit123!</code>
+          <div class="mt-1">Create this user once in Firebase Authentication before signing in.</div>
+          <button id="sample-btn" type="button" class="btn btn-sm btn-outline-primary mt-2">Use sample details</button>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
-  <!-- Firebase Script -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
-    import {
-      getAuth,
-      signInWithEmailAndPassword,
-      createUserWithEmailAndPassword,
-      onAuthStateChanged,
-      updateProfile
-    } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAzjWGO-MvvFpz6TgNiEPgPjK5SEYH5EGQ",
-      authDomain: "blog-app-1c91c.firebaseapp.com",
-      projectId: "blog-app-1c91c",
-      storageBucket: "blog-app-1c91c.appspot.com",
-      messagingSenderId: "722022572280",
-      appId: "1:722022572280:web:758d6cae694206950a9b0d",
-      measurementId: "G-5093G58SHZ"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    document.getElementById("signup-btn").addEventListener("click", () => {
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const username = document.getElementById("username").value.trim();
-
-      if (!username) return alert("Please enter a username.");
-
-      createUserWithEmailAndPassword(auth, email, password)
-        .then(async (userCredential) => {
-          const user = userCredential.user;
-          await updateProfile(user, { displayName: username });
-          window.location.href = "dashboard.html";
-        })
-        .catch(err => alert(err.message));
-    });
-
-    document.getElementById("login-btn").addEventListener("click", () => {
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
-
-      signInWithEmailAndPassword(auth, email, password)
-        .then(async (userCredential) => {
-          const user = userCredential.user;
-          if (!user.displayName) {
-            const username = document.getElementById("username").value.trim();
-            if (username) {
-              await updateProfile(user, { displayName: username });
-            }
-          }
-          window.location.href = "dashboard.html";
-        })
-        .catch(err => alert(err.message));
-    });
-
-  </script>
-
-  <style>
-    .w-45 {
-      width: 48%;
-    }
-
-    * {
-  box-sizing: border-box;
-}
-
-    @media (max-width: 576px) {
-      .w-45 {
-        width: 100%;
-        margin-bottom: 10px;
-      }
-
-      .d-flex.justify-content-between {
-        flex-direction: column;
-        gap: 10px;
-      }
-    }
-  </style>
+  <script type="module" src="script.js"></script>
 </body>
 
 </html>

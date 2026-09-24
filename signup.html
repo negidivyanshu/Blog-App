@@ -1,35 +1,54 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sign Up | Blog it 📝</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="bg-light d-flex align-items-center" style="height: 100vh;">
+<body>
 
-  <div class="container" style="max-width: 400px;">
-    <div class="card shadow-sm p-4">
-      <h2 class="mb-4 text-center">Sign Up</h2>
-      
-      <div class="mb-3">
-        <label for="email" class="form-label">Email address</label>
-        <input type="email" id="email" class="form-control" placeholder="Enter your email" />
-      </div>
-      
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" id="password" class="form-control" placeholder="Enter password" />
+  <nav class="site-nav">
+    <a class="brand" href="index.html"><span class="brand-mark">B</span>Blog it</a>
+  </nav>
+
+  <main class="auth-page">
+    <section class="auth-layout" aria-label="Create a Blog it account">
+      <div class="auth-intro">
+        <div class="intro-kicker">Your point of view matters</div>
+        <h1 class="display-serif">Leave a little light on for the reader.</h1>
+        <p>Start a personal archive of ideas, stories, and the things you are still figuring out.</p>
       </div>
 
-      <button id="signup-btn" class="btn btn-primary w-100 mb-3">Sign Up</button>
-      
-      <p class="text-center mb-0">
-        Already have an account? <a href="login.html">Login here</a>
-      </p>
-    </div>
-  </div>
+      <div class="auth-card">
+        <h2>Create your account</h2>
+        <p class="auth-subtitle">It only takes a minute to get started.</p>
+
+        <form autocomplete="on">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" id="username" class="form-control" placeholder="Choose a username" autocomplete="username" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" id="email" class="form-control" placeholder="you@example.com" autocomplete="email" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="At least 6 characters" autocomplete="new-password" required />
+          </div>
+
+          <button id="signup-btn" type="button" class="btn btn-primary w-100 mt-2">Create account</button>
+        </form>
+
+        <p class="text-center mt-4 mb-0">Already have an account? <a class="auth-link" href="index.html">Log in</a></p>
+      </div>
+    </section>
+  </main>
 
   <script type="module" src="signup.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html> -->
+</html>
