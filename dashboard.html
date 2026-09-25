@@ -14,11 +14,15 @@
   <nav class="app-nav d-flex align-items-center">
   <a class="brand" href="dashboard.html"><span class="brand-mark">B</span>Blog it</a>
   <div class="ms-auto d-flex align-items-center gap-3">
-    <div id="user-info" class="d-flex align-items-center gap-2">
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Enable dark mode" title="Toggle dark mode">
+      <span class="theme-icon" aria-hidden="true">☼</span>
+      <span class="theme-switch-track" aria-hidden="true"><span class="theme-switch-thumb"></span></span>
+      <span class="theme-icon" aria-hidden="true">☾</span>
+    </button>
+    <button id="profile-btn" class="profile-trigger" type="button" aria-label="Open profile">
       <i class="bi bi-person-circle fs-5"></i>
       <span id="username" class="fw-semibold"></span>
-    </div>
-    <button id="logout-btn" class="btn btn-outline-light btn-sm">Logout</button>
+    </button>
   </div>
 </nav>
 
@@ -37,6 +41,68 @@
         <button id="sample-post-btn" type="button" class="btn btn-outline-primary">Use sample post</button>
       </div>
     </section>
+
+    <div id="edit-modal" class="edit-modal" hidden>
+      <div class="edit-modal-panel" role="dialog" aria-modal="true" aria-labelledby="edit-modal-title">
+        <div class="edit-modal-header">
+          <div>
+            <span class="modal-kicker">Refine your draft</span>
+            <h2 id="edit-modal-title">Edit post</h2>
+          </div>
+          <button id="close-edit-modal" type="button" class="modal-close" aria-label="Close edit dialog">&times;</button>
+        </div>
+        <form id="edit-form">
+          <div class="mb-3">
+            <label for="edit-title" class="form-label">Post title</label>
+            <input id="edit-title" class="form-control" type="text" required />
+          </div>
+          <div class="mb-3">
+            <label for="edit-content" class="form-label">Post content</label>
+            <textarea id="edit-content" class="form-control" rows="7" required></textarea>
+          </div>
+          <div class="edit-modal-actions">
+            <button id="cancel-edit" type="button" class="btn btn-outline-primary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="profile-modal" class="edit-modal" hidden>
+      <div class="edit-modal-panel profile-panel" role="dialog" aria-modal="true" aria-labelledby="profile-modal-title">
+        <div class="edit-modal-header">
+          <div>
+            <span class="modal-kicker">Your space</span>
+            <h2 id="profile-modal-title">Profile</h2>
+          </div>
+          <button id="close-profile-modal" type="button" class="modal-close" aria-label="Close profile">&times;</button>
+        </div>
+
+        <p id="profile-bio-display" class="profile-bio-display" hidden></p>
+        <div id="profile-edit-section">
+          <form id="profile-form">
+          <div class="mb-3">
+            <label for="profile-username" class="form-label">Username</label>
+            <input id="profile-username" class="form-control" type="text" required />
+          </div>
+          <div class="mb-3">
+            <label for="profile-bio" class="form-label">Bio</label>
+            <textarea id="profile-bio" class="form-control" rows="3" maxlength="160" placeholder="A short note about you"></textarea>
+          </div>
+          <div class="edit-modal-actions">
+            <button type="submit" class="btn btn-primary">Save profile</button>
+            <button id="logout-btn" type="button" class="btn btn-outline-danger">Logout</button>
+          </div>
+          </form>
+        </div>
+
+        <div id="profile-tabs" class="profile-tabs" role="tablist" aria-label="Saved content">
+          <button id="liked-tab" class="profile-tab is-active" type="button" role="tab">Liked</button>
+          <button id="saved-tab" class="profile-tab" type="button" role="tab">Saved</button>
+        </div>
+        <div id="profile-posts" class="profile-posts"></div>
+      </div>
+    </div>
 
     <section class="posts-section" aria-labelledby="posts-title">
       <h2 id="posts-title">Recent posts</h2>

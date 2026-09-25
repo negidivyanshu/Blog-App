@@ -11,6 +11,11 @@
 
   <nav class="site-nav">
     <a class="brand" href="index.html"><span class="brand-mark">B</span>Blog it</a>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Enable dark mode" title="Toggle dark mode">
+      <span class="theme-icon" aria-hidden="true">☼</span>
+      <span class="theme-switch-track" aria-hidden="true"><span class="theme-switch-thumb"></span></span>
+      <span class="theme-icon" aria-hidden="true">☾</span>
+    </button>
   </nav>
 
   <main class="auth-page">
@@ -28,7 +33,7 @@
         <form autocomplete="on">
           <div class="mb-3">
             <label for="username" class="form-label">Username</label>
-            <input type="text" id="username" class="form-control" placeholder="Choose a username" autocomplete="username" required />
+            <input type="text" id="username" class="form-control" placeholder="@yourname" autocomplete="username" required />
           </div>
 
           <div class="mb-3">

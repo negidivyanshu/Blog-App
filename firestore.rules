@@ -2,16 +2,54 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function ownsUser(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    function ownsPost(postId) {
+      return signedIn()
+        && get(/databases/$(database)/documents/posts/$(postId)).data.userId == request.auth.uid;
+    }
+
     match /users/{userId} {
-      allow read, write: if request.auth != null
-        && request.auth.uid == userId;
+      allow read: if signedIn();
+      allow write: if ownsUser(userId);
+    }
+
+    match /usernames/{username} {
+      allow read: if true;
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if signedIn()
+        && resource.data.uid == request.auth.uid;
     }
 
     match /posts/{postId} {
-      allow read: if request.auth != null;
-      allow create: if request.auth != null
+      allow read: if signedIn();
+      allow create: if signedIn()
         && request.resource.data.userId == request.auth.uid;
-      allow update, delete: if false;
+      allow update: if ownsUser(resource.data.userId)
+        || (
+          signedIn()
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+            "likedBy", "savedBy"
+          ])
+        );
+      allow delete: if ownsUser(resource.data.userId);
+
+        match /comments/{commentId} {
+          allow read: if signedIn();
+          allow create: if signedIn()
+            && request.resource.data.keys().hasAll([
+              "content", "userId", "author", "timestamp"
+            ]);
+          allow update: if ownsUser(resource.data.userId);
+          allow delete: if ownsUser(resource.data.userId) || ownsPost(postId);
+        }
     }
   }
 }

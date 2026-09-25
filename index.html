@@ -12,6 +12,11 @@
 <body>
   <nav class="site-nav">
     <a class="brand" href="index.html"><span class="brand-mark">B</span>Blog it</a>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Enable dark mode" title="Toggle dark mode">
+      <span class="theme-icon" aria-hidden="true">☼</span>
+      <span class="theme-switch-track" aria-hidden="true"><span class="theme-switch-thumb"></span></span>
+      <span class="theme-icon" aria-hidden="true">☾</span>
+    </button>
   </nav>
 
   <main class="auth-page">
@@ -29,8 +34,8 @@
 
         <form id="login-form" autocomplete="on">
           <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input type="email" id="email" name="email" class="form-control" placeholder="you@example.com" autocomplete="email" required />
+            <label for="username" class="form-label">Username</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="@yourname" autocomplete="username" required />
           </div>
 
           <div class="mb-3">
@@ -46,9 +51,9 @@
 
         <div class="sample-login">
           <strong>Sample account</strong>
-          Email: <code>demo@blogit.dev</code><br />
+          Username: <code>@demo</code><br />
           Password: <code>Blogit123!</code>
-          <div class="mt-1">Create this user once in Firebase Authentication before signing in.</div>
+          <div class="mt-1">The demo account uses username login.</div>
           <button id="sample-btn" type="button" class="btn btn-sm btn-outline-primary mt-2">Use sample details</button>
         </div>
       </div>

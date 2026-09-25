@@ -15,9 +15,9 @@ Open `http://localhost:8000/index.html` in your browser.
 
 ## Sample login
 
-Use these values for a demo account after creating the user in Firebase Authentication:
+Use these values to log in to the demo account:
 
-- Email: `demo@blogit.dev`
+- Username: `@demo`
 - Password: `Blogit123!`
 
 ## Firebase setup
