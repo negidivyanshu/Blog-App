@@ -276,22 +276,27 @@ if (loginBtn) {
     const password = document.getElementById("password").value.trim();
 
     try {
-      const username = normalizeUsername(usernameInput);
-      validateUsername(username);
-      const usernameSnap = await getDoc(doc(db, "usernames", username));
       let email;
+      const isEmail = usernameInput.includes("@") && !usernameInput.startsWith("@");
 
-      if (usernameSnap.exists()) {
-        email = usernameSnap.data().email;
-      } else if (username === "demo") {
-        email = "demo@blogit.dev";
+      if (isEmail) {
+        email = usernameInput;
       } else {
-        throw new Error("Username not found.");
+        const username = normalizeUsername(usernameInput);
+        validateUsername(username);
+        const usernameSnap = await getDoc(doc(db, "usernames", username));
+        if (usernameSnap.exists()) {
+          email = usernameSnap.data().email;
+        } else if (username === "demo") {
+          email = "demo@blogit.dev";
+        } else {
+          throw new Error("Username not found.");
+        }
       }
 
       const cred = await signInWithEmailAndPassword(auth, email, password);
-      if (!usernameSnap.exists() && username === "demo") {
-        await setDoc(doc(db, "usernames", username), {
+      if (!isEmail && normalizeUsername(usernameInput) === "demo") {
+        await setDoc(doc(db, "usernames", "demo"), {
           uid: cred.user.uid,
           email,
           username: "@demo"
